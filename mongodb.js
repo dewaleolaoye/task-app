@@ -1,13 +1,8 @@
-// CRUD
+// CRUD: CREAT READ UPDATE DELETE
 // const MongoClient = mongodb.MongoClient();
 // const ObjectID = mongodb.ObjectID;
 const { MongoClient, ObjectID } = require("mongodb"); // object destructuring
 
-const id = new ObjectID();
-console.log(id);
-console.log(id.id);
-console.log(id.id.length);
-console.log(id.toHexString().length);
 const connectionURL = "mongodb://127.0.0.1:27018";
 const databaseName = "task-manager";
 
@@ -18,42 +13,49 @@ MongoClient.connect(
     if (error) return "Unable to connect to the Database";
     // console.log("Database Connected");
     const db = client.db(databaseName);
-    // users collection
-    // db.collection("users").insertOne(
-    //   {
-    //     _id: id,
-    //     name: "Adewale",
-    //     age: 27
-    //   },
-    //   (error, result) => {
-    //     if (error) {
-    //       return console.log("Unable to insert users");
-    //     }
-    //     console.log(result.ops);
-    //   }
-    // );
-    // // task collection
-    // db.collection("tasks").insertMany(
-    //   [
-    //     {
-    //       description: "Learn React in April",
-    //       completed: false
-    //     },
-    //     {
-    //       description: "Use piggybank to save",
-    //       completed: false
-    //     },
-    //     {
-    //       description: "Start writing in April",
-    //       completed: false
-    //     }
-    //   ],
-    //   (error, result) => {
-    //     if (error) {
-    //       return console.log("Unable to insert users description");
-    //     }
-    //     console.log(result.ops);
-    //   }
-    // );
+    //     db.collection("users").findOne(
+    //       { _id: new ObjectID("5c9ce0812b880c67154fab18") },
+    //       (error, user) => {
+    //         if (error) {
+    //           return console.log("Unable to find user");
+    //         }
+    //         console.log(user);
+    //       }
+    //     );
+
+    //     db.collection("users")
+    //       .find({ age: 27 })
+    //       .toArray((error, user) => {
+    //         if (error) {
+    //           return console.log("Unable to find users");
+    //         }
+    //         console.log(user);
+    //       });
+    // // count
+    //     db.collection("users")
+    //       .find({ name: "Adewale" })
+    //       .count((error, count) => {
+    //         console.log(count);
+    //       });
+
+    // findOne
+    db.collection("tasks").findOne(
+      { _id: new ObjectID("5c9ce0812b880c67154fab1c") },
+      (err, task) => {
+        if (err) {
+          return console.log("Unable to find user with id");
+        }
+        console.log(task);
+      }
+    );
+    // find
+    db.collection("tasks")
+      .find({ completed: false })
+      .toArray((error, task) => {
+        if (error) {
+          return console.log("Unable to find uncompleted task");
+        }
+        console.log(task);
+      });
   }
 );
