@@ -18,9 +18,24 @@ const User = mongoose.model("User", {
     required: true,
     validate(value) {
       if (!validator.isEmail(value)) {
-        throw new Error("");
+        throw new Error("Email is invalid");
       }
-      // console.log(value);
+    }
+  },
+  password: {
+    type: String,
+    required: true,
+    trim: true,
+    toLowerCAse: true,
+    validate(value) {
+      if (!value.length < 6) {
+        throw new Error("Password should be greater than 6 characters");
+      }
+    },
+    validate(password) {
+      if (password.toLowerCAse().includes("password")) {
+        throw new Error("Password can not contain 'password' ");
+      }
     }
   },
   age: {
@@ -33,40 +48,42 @@ const User = mongoose.model("User", {
   }
 });
 
-const me = new User({
-  name: "Adewale Olaoye",
-  email: "dewaleolaoye@gamail.com",
-  age: 24
-});
-
-me.save()
-  .then(result => {
-    console.log(result);
-  })
-  .catch(error => {
-    console.log(error);
-  });
-
-// const Task = mongoose.model("Task", {
-//   description: {
-//     type: String,
-//     required: true
-//   },
-//   completed: {
-//     type: Boolean
-//   }
+// const me = new User({
+//   name: "Fatai",
+//   email: "dewaleolaoye@gamail.com",
+//   password: "#sweetsecure",
+//   age: 24
 // });
 
-// const myTask = new Task({
-//   description: "Learn ReactJs Next Month",
-//   completed: false
-// });
-
-// myTask
-//   .save()
+// me.save()
 //   .then(result => {
 //     console.log(result);
 //   })
 //   .catch(error => {
 //     console.log(error);
 //   });
+
+const Task = mongoose.model("Task", {
+  description: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  completed: {
+    type: Boolean,
+    default: false
+  }
+});
+
+const myTask = new Task({
+  description: " Learn ReactJs Next Month "
+});
+
+myTask
+  .save()
+  .then(result => {
+    console.log(result);
+  })
+  .catch(error => {
+    console.log(error);
+  });
