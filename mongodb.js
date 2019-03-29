@@ -13,33 +13,22 @@ MongoClient.connect(
     if (error) return "Unable to connect to the Database";
     // console.log("Database Connected");
     const db = client.db(databaseName);
-    // update
     // db.collection("users")
-    //   .updateOne(
-    //     {
-    //       _id: new ObjectID("5c9ce59a47e52d1778ffa7bb")
-    //     },
-    //     {
-    //       $inc: {
-    //         age: 5
-    //       }
-    //     }
-    //   )
+    //   .deleteMany({
+    //     age: 27
+    //   })
     //   .then(result => {
     //     console.log(result);
     //   })
     //   .catch(error => {
-    //     console.log("Errors: ", error);
+    //     console.log(error);
     //   });
     db.collection("tasks")
-      .updateMany(
-        {
-          completed: false
-        },
-        { $set: { completed: true } }
-      )
+      .deleteOne({
+        _id: new ObjectID("5c9ce0812b880c67154fab1a")
+      })
       .then(result => {
-        console.log(result.modifiedCount);
+        console.log(result.deletedCount);
       })
       .catch(error => {
         console.log(error);
