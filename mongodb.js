@@ -3,7 +3,7 @@
 // const ObjectID = mongodb.ObjectID;
 const { MongoClient, ObjectID } = require("mongodb"); // object destructuring
 
-const connectionURL = "mongodb://127.0.0.1:27017";
+const connectionURL = "mongodb://127.0.0.1:27018";
 const databaseName = "task-manager";
 
 MongoClient.connect(
@@ -23,15 +23,15 @@ MongoClient.connect(
     //   .catch(error => {
     //     console.log(error);
     //   });
-    db.collection("tasks")
-      .deleteOne({
-        _id: new ObjectID("5c9ce0812b880c67154fab1a")
-      })
-      .then(result => {
-        console.log(result.deletedCount);
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    // db.collection("tasks")
+    //   .deleteOne({
+    //     _id: new ObjectID("5c9ce0812b880c67154fab1a")
+    //   })
+    //   .then(result => {
+    //     console.log(result.deletedCount);
+    //   })
+    //   .catch(error => {
+    //     console.log(error);
+    //   });
   }
 );
