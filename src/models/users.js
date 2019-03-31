@@ -25,7 +25,6 @@ const User = mongoose.model("User", {
     type: String,
     minlength: 7,
     required: true,
-
     trim: true,
     validate(password) {
       if (password.toLowerCase().includes("password")) {
